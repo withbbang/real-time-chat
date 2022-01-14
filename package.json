@@ -1,0 +1,29 @@
+{
+  "name": "realtimechat",
+  "version": "1.0.0",
+  "description": "Real Time Chat by using socket io",
+  "main": "index.js",
+  "scripts": {
+    "start": "npm run build:live",
+    "build": "tsc -p .",
+    "build:live": "nodemon --watch '*.ts' --exec ts-node index.ts json",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/withbbang/real-time-chat.git"
+  },
+  "author": "Bread",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/withbbang/real-time-chat/issues"
+  },
+  "homepage": "https://github.com/withbbang/real-time-chat#readme",
+  "dependencies": {
+    "express": "^4.17.2",
+    "nodemon": "^2.0.15",
+    "socket.io": "^4.4.1",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.5.4"
+  }
+}
