@@ -1,6 +1,12 @@
 // 지정 namespace로 접속한다
-var chat = io("http://localhost:4000/chat"),
+const chat = io("http://localhost:4000/chat"),
   news = io("/news");
+
+const id = window.location.href.substring(
+  window.location.href.lastIndexOf("/") + 1,
+);
+
+chat.emit("join-room", id);
 
 $("form").submit(function (e) {
   e.preventDefault();

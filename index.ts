@@ -1,11 +1,11 @@
 import express, { Request, Response } from "express";
 import { app, server, io } from "./createServer";
 import { ISocket } from "./interface";
-import { roomRouter } from "./room";
+import { chatRouter } from "./chat";
 const PORT: Number = 4000;
 
 app.use(express.static("public"));
-app.use("/chat", roomRouter);
+app.use("/chat", chatRouter);
 
 app.get("/", (req: Request, res: Response) => {
   res.sendFile(__dirname + "/index.html");
