@@ -1,25 +1,51 @@
-// 지정 namespace로 접속한다
-const chat = io("http://localhost:4000/chat"),
-  news = io("/news");
+const chat = io("/chat");
 
-const id = window.location.href.substring(
-  window.location.href.lastIndexOf("/") + 1,
-);
+const rooms = JSON.parse(datas.replaceAll("&#34;", '"'));
 
-chat.emit("join-room", id);
+const joinRoom = () => {
+  const name = document.getElementById("roomName").value;
 
-$("form").submit(function (e) {
-  e.preventDefault();
+  if (!name) {
+    alert("Don't empty room name");
+    return;
+  }
 
-  // 서버로 자신의 정보를 전송한다.
-  chat.emit("chat message", {
-    name: $("#name").val(),
-    room: $("#room").val(),
-    msg: $("#msg").val(),
-  });
-});
+  fetch("/chat/join-room", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body: JSON.stringify({ name }),
+  })
+    .then((res) => res.json())
+    .then((res) => (location.href = res.url));
+};
 
-// 서버로부터의 메시지가 수신되면
-chat.on("chat message", function (data) {
-  $("#chat").append($("<li>").text(data));
-});
+(() => {
+  if (rooms.length > 0) {
+    rooms.forEach((room) => {
+      const liTag = document.createElement("li");
+      const btnTge = document.createElement("button");
+
+      btnTge.innerText = room.name;
+      btnTge.addEventListener("click", () => {
+        // fetch("/chat/click-room", {
+        //   method: "POST",
+        //   headers: {
+        //     "Content-type": "application/json",
+        //   },
+        //   body: JSON.stringify({ roomId: room.roomId }),
+        // });
+        location.href = `/chat/room/${room.roomId}`;
+      });
+
+      liTag.append(btnTge);
+      document.getElementById("list").append(liTag);
+    });
+  } else {
+    const liTag = document.createElement("li");
+
+    liTag.innerText = "No room list";
+    document.getElementById("list").append(liTag);
+  }
+})();

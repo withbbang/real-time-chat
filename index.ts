@@ -4,11 +4,14 @@ import { ISocket } from "./interface";
 import { chatRouter } from "./chat";
 const PORT: Number = 4000;
 
+app.set("view engine", "ejs");
 app.use(express.static("public"));
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 app.use("/chat", chatRouter);
 
 app.get("/", (req: Request, res: Response) => {
-  res.sendFile(__dirname + "/index.html");
+  res.render("index");
 });
 
 io.on("connection", (socket: ISocket) => {
