@@ -20,7 +20,7 @@ chatRouter.get("/", (req: Request, res: Response) => {
 chatRouter.post("/join-room", (req: Request, res: Response) => {
   const roomId: String = uuidv4();
   rooms.push({ roomId, name: req.body.name });
-  res.json({ url: `/chat/room/${roomId}` });
+  res.json({ url: `/chat/room/${roomId}`, roomId, name: req.body.name });
 });
 
 chatRouter.post("/click-room", (req: Request, res: Response) => {
@@ -36,6 +36,7 @@ chat.on("connection", (socket: ISocket) => {
     console.log(roomId);
 
     socket.join(roomId);
-    chat.to(roomId).emit("chat message", data.msg);
+    socket.to(roomId).emit("user-connected", "user-connected");
+    // chat.to(roomId).emit("chat message", data.msg);
   });
 });

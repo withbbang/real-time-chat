@@ -1,3 +1,5 @@
+"use strict";
+
 // 지정 namespace로 접속한다
 const room = io("/chat/room");
 
