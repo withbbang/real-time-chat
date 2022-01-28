@@ -28,11 +28,12 @@ chatRouter.post("/click-room", (req: Request, res: Response) => {
 });
 
 chat.on("connection", (socket: ISocket) => {
-  console.log("visited chat?");
+  console.log("Connected Chat Namespace");
 
   socket.on("join-room", (data: any) => {
     const roomId: string = data.roomId;
     socket.join(roomId);
+    console.log(`Joined in ${roomId} room`);
     chat.to(roomId).emit("user-connected", "user-connected");
     setInterval(() => chat.to(roomId).emit("interval message", roomId), 2000);
   });
@@ -40,5 +41,6 @@ chat.on("connection", (socket: ISocket) => {
   socket.on("disconnect", (data: any) => {
     const roomId: string = data.roomId;
     socket.leave(roomId);
+    console.log(`Leaved at ${roomId} room`);
   });
 });
