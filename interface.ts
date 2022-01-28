@@ -12,6 +12,6 @@ export interface IRequest extends Request {
 }
 
 export interface Room {
-  roomId: String;
-  name: String;
+  roomId: string;
+  name: string;
 }

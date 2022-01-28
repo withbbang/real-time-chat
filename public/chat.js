@@ -2,6 +2,8 @@
 
 const chat = io("/chat");
 
+chat.on("interval message", (data) => console.log(data));
+
 const rooms = JSON.parse(datas.replaceAll("&#34;", '"'));
 
 let chattingPopup = null;
@@ -32,6 +34,7 @@ const joinRoom = () => {
       chattingPopup = new ChattingPopup({
         title: `${name} Room`,
         socket: chat,
+        roomId,
       });
       chattingPopup.show();
 

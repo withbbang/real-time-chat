@@ -8,6 +8,8 @@ class ChattingPopup {
     this.modalTag.setAttribute("class", "modal");
     this.modalTag.addEventListener("click", (e) => {
       if (e.target !== e.currentTarget) return;
+      const { socket, roomId } = args;
+      socket.disconnect();
       this.modalTag.remove();
     });
     const modalBody = document.createElement("div");

@@ -5,7 +5,7 @@ import { ISocket, IRequest } from "../../interface";
 export const roomRouter: Router = Router();
 
 const room = io.of("/chat/room");
-let roomId: String = "";
+let roomId: string = "";
 
 roomRouter.get("/", (req: Request, res: Response) => {
   res.render("room");
