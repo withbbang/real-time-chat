@@ -36,7 +36,8 @@ const joinRoom = () => {
         socket: chat,
         roomId,
       });
-      chattingPopup.show();
+
+      chattingPopup.setButton().show();
 
       const liTag = document.createElement("li");
       const listTag = document.getElementById("list");

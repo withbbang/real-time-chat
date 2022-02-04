@@ -33,9 +33,10 @@ chat.on("connection", (socket: ISocket) => {
   socket.on("join-room", (data: any) => {
     const roomId: string = data.roomId;
     socket.join(roomId);
-    console.log(`Joined in ${roomId} room`);
     chat.to(roomId).emit("user-connected", "user-connected");
-    setInterval(() => chat.to(roomId).emit("interval message", roomId), 2000);
+    chat.on("send", (message) => {
+      console.log(message);
+    });
   });
 
   socket.on("disconnect", (data: any) => {

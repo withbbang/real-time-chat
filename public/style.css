@@ -14,10 +14,22 @@
   left: 50%;
   width: 400px;
   height: 600px;
-  padding: 40px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   background-color: rgb(255, 255, 255);
   border-radius: 10px;
   box-shadow: 0 2px 3px 0 rgba(34, 36, 38, 0.15);
   transform: translateX(-50%) translateY(-50%);
+}
+
+.messages {
+  flex: 1;
+}
+
+.send_message {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
 }
